@@ -4,6 +4,7 @@ import time
 import os
 import logging
 from ritetag_api import RiteTag
+from telegram_api import TelegramApi
 import credentials
 
 
@@ -19,12 +20,14 @@ class TwitterBot:
         auth.set_access_token(credentials.TWEEPY_ACCESS_KEY,
                               credentials.TWEEPY_ACCESS_SECRET)
 
+        self.telegram = TelegramApi()
+
         self.ritetag_api = RiteTag(credentials.RITETAG_TOKEN)
 
-        self.api = tweepy.API(auth, wait_on_rate_limit=True,
-                              wait_on_rate_limit_notify=True)
+        self.tweepy = tweepy.API(auth, wait_on_rate_limit=True,
+                                 wait_on_rate_limit_notify=True)
 
-        self.user = self.api.me()
+        self.user = self.tweepy.me()
 
     def sleep(self):
         waiting = random.randint(60, 360)
@@ -33,7 +36,7 @@ class TwitterBot:
         return
 
     def like_tweet(self, search, number_tweets, follow_author=False):
-        for tweet in enumerate(tweepy.Cursor(self.api.search, search).items(number_tweets)):
+        for tweet in enumerate(tweepy.Cursor(self.tweepy.search, search).items(number_tweets)):
             try:
                 tweet.favorite()
                 print('Tweet Liked')
@@ -48,7 +51,7 @@ class TwitterBot:
                 break
 
     def follow_user(self, user_id):
-        self.api.create_friendship(user_id=user_id)
+        self.tweepy.create_friendship(user_id=user_id)
         print('User Followed')
         self.sleep()
 
@@ -59,20 +62,21 @@ class TwitterBot:
 
         for filename in os.listdir(directory):
             file = os.path.join(fileDir, f"images/{filename}")
-            media = self.api.media_upload(file)
+            media = self.tweepy.media_upload(file)
 
-            post = text if len(text) > 0 else 'default text 🙃'
+            post = text if len(text) > 0 else self.get_post_text()
 
-            self.api.update_status(post, media_ids=[media.media_id_string])
+            self.tweepy.update_status(post, media_ids=[media.media_id_string])
+            self.telegram.send_message("Tweet postado com sucesso")
 
             if(remove_image):
                 os.remove(file)
 
             break
 
-    def get_post_text(self, file):
+    def get_post_text(self):
         """ Reads a random line """
-        file = open(file, 'r')
+        file = open('posts.txt', 'r')
         line = next(file)
         for num, lines in enumerate(file, 2):
             if random.randrange(num):
@@ -84,4 +88,5 @@ class TwitterBot:
         stats = self.ritetag_api.get_hashtag_suggestion(text)
         hashtags = "#" + " #".join([stat.hashtag for stat in stats])
         post = text + hashtags
-        self.api.update_status(post)
+        self.tweepy.update_status(post)
+        self.telegram.send_message("Tweet postado com sucesso")
