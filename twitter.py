@@ -85,8 +85,3 @@ class TwitterBot:
         hashtags = "#" + " #".join([stat.hashtag for stat in stats])
         post = text + hashtags
         self.api.update_status(post)
-
-
-bot = TwitterBot()
-post_text = bot.get_post_text('posts.txt')
-bot.post_media(post_text, remove_image=True)
