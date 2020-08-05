@@ -4,3 +4,4 @@ __pycache__
 credentials.py
 posts.txt
 images/
+*.log

@@ -1,8 +1,8 @@
 from ritetag import RiteTagApi
+import logging
 
 
 class RiteTag:
-
     def __init__(self, token):
         self.token = token
         self.client = self.__auth()
@@ -18,4 +18,4 @@ class RiteTag:
         return stats
 
     def limit_80_percentage_reached(self, limit):
-        print(f"Used {limit.usage}. The limit resets on {limit.reset}")
+        logging.warning(f"Used {limit.usage}. The limit resets on {limit.reset}")
