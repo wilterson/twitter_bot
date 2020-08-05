@@ -25,3 +25,5 @@ Schedule tweets whatever you want with multi-threaded jobs:
 ### Automatic hashtag your tweet
 Missing creativity? Let the bot add automatic hashtags to your tweet, using [RiteTag](https://app.ritetag.com/) for better hashtags suggestions.
 
+### [Random Tweets](#random)
+Add your tweets ideas to a `post.txt` file, when the bot posts the tweet, it will fetch a random tweet from that file.
