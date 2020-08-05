@@ -16,7 +16,7 @@ This bot automates some of Twitter methods.
 # Description
   Built with python, this bot automates Twitter actions to get more engagement on your profile. This bot uses Tweepy API
 
-Schedule tweets whatever you want with multi-threaded jobs:
+Schedule tweets whenever you want with multi-threaded jobs:
 
 ![Schedule jobs](https://github.com/wilterson/twitter_bot/blob/master/images/schedule.png)
 
