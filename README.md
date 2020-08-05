@@ -17,10 +17,10 @@ This bot automates some of Twitter methods.
   Built with python, this bot automates Twitter actions to get more engagement on your profile. This bot uses Tweepy API
 
 Schedule tweets whatever you want with multi-threaded jobs:
-![Schedule jobs](https://github.com/wilterson/schedule.png)
+![Schedule jobs](https://github.com/wilterson/images/schedule.png)
 
 ### Notification when tweet gets posted
-![Telegram message](https://github.com/wilterson/push_notification.jpeg)
+![Telegram message](https://github.com/wilterson/images/push_notification.jpeg)
 
 ### Automatic hashtag your tweet
 Missing creativity? Let the bot add automatic hashtags to your tweet, using [RiteTag](https://app.ritetag.com/) for better hashtags suggestions.
