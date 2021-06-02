@@ -33,6 +33,6 @@ smart-open==2.1.0
 telepot==12.7
 toml==0.10.1
 tweepy==3.9.0
-urllib3==1.25.10
+urllib3==1.26.5
 wrapt==1.12.1
 yarl==1.5.1
